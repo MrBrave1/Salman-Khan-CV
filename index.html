@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salman Khan | MEP Site Engineer & Project Planning Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ══════════ PRINT BAR ══════════ */
+.print-bar {
+  background: #1a1a2e;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.print-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.3px;
+}
+.print-hint strong { 
+  color: #16a085; 
+  font-weight: 600;
+}
+.print-btn {
+  background: linear-gradient(135deg, #16a085 0%, #0f7a66 100%);
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(22,160,133,0.3);
+}
+.print-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22,160,133,0.4);
+}
+
+/* ══════════ SCREEN CONTAINER ══════════ */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #e8f5f3 0%, #d4e9e6 100%);
+  font-family: 'Inter', sans-serif;
+}
+.screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 48px;
+}
+.screen-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7a8a8f;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+/* ══════════ A4 PAPER ══════════ */
+.paper {
+  width: 794px;
+  background: #ffffff;
+  box-shadow: 0 12px 64px rgba(0,0,0,0.18), 0 2px 12px rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.55;
+  color: #2c3e50;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ══════════ HEADER ══════════ */
+.header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3a4d 100%);
+  padding: 28px 36px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(22,160,133,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  left: -40px;
+  bottom: -40px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(22,160,133,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+.name {
+  font-family: 'Playfair Display', serif;
+  font-size: 32pt;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+.title {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.72);
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 24px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 7.5pt;
+  color: rgba(255,255,255,0.68);
+}
+.contact-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Accent bar */
+.accent-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #16a085 0%, #2ecc71 50%, #16a085 100%);
+  box-shadow: 0 2px 8px rgba(22,160,133,0.3);
+}
+
+/* ══════════ TWO COLUMN LAYOUT ══════════ */
+.body-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+/* ══════════ SIDEBAR ══════════ */
+.sidebar {
+  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f5 100%);
+  border-right: 1px solid #dce4e7;
+  padding: 20px 18px;
+}
+
+.sidebar-section {
+  margin-bottom: 18px;
+}
+.sidebar-section:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-title {
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #16a085;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #16a085;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sidebar-title::before {
+  content: '';
+  width: 3px;
+  height: 10px;
+  background: #16a085;
+  border-radius: 3px;
+}
+
+/* Education items */
+.edu-item {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5eaec;
+}
+.edu-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.edu-degree {
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+.edu-details {
+  font-size: 6.8pt;
+  color: #7a8a8f;
+  line-height: 1.4;
+}
+
+/* Skills tags */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.skill-tag {
+  font-size: 6.2pt;
+  padding: 3px 8px;
+  background: #ffffff;
+  border: 1px solid #d0d9dc;
+  border-radius: 12px;
+  color: #4a5f6a;
+  font-weight: 500;
+  line-height: 1.3;
+  transition: all 0.2s ease;
+}
+
+/* Expertise list */
+.expertise-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.expertise-list li {
+  font-size: 7pt;
+  color: #556a75;
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.45;
+}
+.expertise-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #16a085;
+  font-size: 8pt;
+  font-weight: 700;
+}
+
+/* Personal info */
+.personal-info {
+  font-size: 7pt;
+  color: #556a75;
+  line-height: 1.8;
+}
+.personal-info strong {
+  color: #2c3e50;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 90px;
+}
+
+/* ══════════ MAIN CONTENT ══════════ */
+.main-content {
+  padding: 20px 28px 22px 24px;
+}
+
+.section {
+  margin-bottom: 18px;
+}
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #16a085;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #16a085 0%, transparent 100%);
+}
+
+/* Objective */
+.objective-text {
+  font-size: 8pt;
+  color: #4a5f6a;
+  line-height: 1.7;
+  text-align: justify;
+  font-weight: 400;
+}
+
+/* Experience items */
+.experience-item {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e8eef0;
+}
+.experience-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+.job-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1.2;
+}
+.date-badge {
+  font-size: 6.5pt;
+  color: #16a085;
+  font-weight: 600;
+  background: rgba(22,160,133,0.1);
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+  border: 1px solid rgba(22,160,133,0.2);
+}
+
+.company-name {
+  font-size: 8pt;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 2px;
+}
+.project-details {
+  font-size: 7pt;
+  color: #7a8a8f;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.responsibilities-title {
+  font-size: 6.8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #4a5f6a;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.responsibility-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.responsibility-list li {
+  font-size: 7.8pt;
+  color: #4a5f6a;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.6;
+}
+.responsibility-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  background: #16a085;
+  border-radius: 50%;
+}
+.responsibility-list li strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Strengths & Hobbies */
+.strengths-list, .hobbies-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.strengths-list li, .hobbies-list li {
+  font-size: 7.5pt;
+  color: #4a5f6a;
+  padding: 4px 12px;
+  background: #f8fafb;
+  border-left: 3px solid #16a085;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.4;
+}
+.strengths-list li strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #f8fafb 0%, #f0f4f5 100%);
+  border-top: 1px solid #dce4e7;
+  padding: 10px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-left {
+  font-size: 6.8pt;
+  color: #9eadb4;
+}
+.footer-right {
+  font-size: 6.5pt;
+  color: #16a085;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ══════════ PRINT STYLES ══════════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff !important;
+  }
+  .print-bar {
+    display: none !important;
+  }
+  .screen-container {
+    background: none !important;
+    padding: 0 !important;
+    display: block;
+  }
+  .screen-label {
+    display: none !important;
+  }
+  .paper {
+    width: 100%;
+    box-shadow: none !important;
+    font-size: 8.5pt;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .experience-item, .sidebar-section, .section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* ══════════ MOBILE RESPONSIVE ══════════ */
+@media screen and (max-width: 820px) {
+  .screen-container {
+    padding: 0;
+    background: #ffffff;
+  }
+  .screen-label {
+    display: none;
+  }
+  .paper {
+    width: 100%;
+    box-shadow: none;
+  }
+  .body-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid #dce4e7;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- PRINT BAR -->
+<div class="print-bar">
+  <span class="print-hint">
+    Tip: <strong>Margins → Minimum</strong> &nbsp;·&nbsp; <strong>Background Graphics → ON</strong> &nbsp;·&nbsp; Paper: <strong>A4</strong>
+  </span>
+  <button class="print-btn" onclick="window.print()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <polyline points="6 9 6 2 18 2 18 9"/>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+    Print / Save as PDF
+  </button>
+</div>
+
+<div class="screen-container">
+  <div class="screen-label">A4 Print Preview</div>
+
+  <div class="paper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-content">
+        <div class="name">Salman Khan</div>
+        <div class="title">MEP Site Engineer · Project Planning & Control Manager · B.Tech Mechanical Engineering</div>
+        
+        <div class="contact-grid">
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            P-89, Batla House, Jamia Nagar, Okhla, New Delhi - 110025
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            +91-7836917199
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            skhan783691@gmail.com
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            DOB: 03/02/1995 · Passport: R6399583
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accent-bar"></div>
+
+    <!-- BODY GRID -->
+    <div class="body-grid">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <!-- Education -->
+        <div class="sidebar-section">
+          <div class="sidebar-title">Education</div>
+          <div class="edu-item">
+            <div class="edu-degree">B.Tech – Mechanical & Automation Engineering</div>
+            <div class="edu-details">Al-Falah University, Faridabad<br>2018 · First Division</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">12th Grade</div>
+            <div class="edu-details">Jamia Millia Islamia, Delhi<br>2013</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">10th Grade</div>
+            <div class="edu-details">Jamia Millia Islamia, Delhi<br>2011</div>
+          </div>
+        </div>
+
+        <!-- Core Expertise -->
+        <div class="sidebar-section">
+          <div class="sidebar-title">Core Expertise</div>
+          <ul class="expertise-list">
+            <li>HVAC Systems Design & Installation</li>
+            <li>Chilled Water Systems & Chillers</li>
+            <li>Pump Automation & Control</li>
+            <li>Firefighting Systems</li>
+            <li>Ductwork & Ventilation</li>
+            <li>Cooling Towers & Boilers</li>
+            <li>MEP Coordination</li>
+            <li>Shop Drawings Review</li>
+            <li>Material Submittals</li>
+            <li>Quality Assurance/Control</li>
+            <li>Project Planning & Scheduling</li>
+            <li>Primavera P6 / MS Project</li>
+          </ul>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="sidebar-section">
+          <div class="sidebar-title">Technical Skills</div>
+          <div class="skills-grid">
+            <span class="skill-tag">HVAC</span>
+            <span class="skill-tag">Chilled Water</span>
+            <span class="skill-tag">MEP</span>
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">Primavera P6</span>
+            <span class="skill-tag">MS Project</span>
+            <span class="skill-tag">QA/QC</span>
+            <span class="skill-tag">Firefighting</span>
+            <span class="skill-tag">Pumps</span>
+            <span class="skill-tag">Chillers</span>
+            <span class="skill-tag">Booster Pumps</span>
+            <span class="skill-tag">BMS</span>
+            <span class="skill-tag">ASHRAE</span>
+            <span class="skill-tag">SMACNA</span>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="sidebar-section">
+          <div class="sidebar-title">Languages</div>
+          <div class="skills-grid">
+            <span class="skill-tag">English</span>
+            <span class="skill-tag">Hindi</span>
+            <span class="skill-tag">Urdu</span>
+            <span class="skill-tag">Arabic</span>
+          </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="sidebar-section">
+          <div class="sidebar-title">Personal Info</div>
+          <div class="personal-info">
+            <strong>Father's Name:</strong> Mazahir Hussain<br>
+            <strong>Marital Status:</strong> Married<br>
+            <strong>Nationality:</strong> Indian<br>
+            <strong>Sex:</strong> Male
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+
+        <!-- Career Objective -->
+        <div class="section">
+          <div class="section-title">Career Objective</div>
+          <p class="objective-text">
+            Dedicated and results-driven Mechanical Engineer with a strong foundation in MEP (Mechanical, Electrical, and Plumbing) systems, seeking a challenging role in a reputed organization where I can apply my technical expertise and hands-on experience to deliver high-quality engineering solutions. With over <strong>5+ years of experience in the Gulf region</strong> managing MEP operations for large-scale residential, commercial, and industrial projects, I am well-versed in HVAC systems, chilled water systems, pump automation, and firefighting solutions. My goal is to contribute to projects that demand <strong>innovation, efficiency, and sustainability</strong> while continuing to grow professionally through exposure to cutting-edge technologies, leadership opportunities, and a dynamic work environment.
+          </p>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="section">
+          <div class="section-title">Professional Experience</div>
+
+          <!-- IKEA Project -->
+          <div class="experience-item">
+            <div class="exp-header">
+              <div class="job-title">Project Planning & Control Manager</div>
+              <div class="date-badge">Jan 2025 – Present</div>
+            </div>
+            <div class="company-name">JN Lighting India LLP</div>
+            <div class="project-details">Client: IKEA India Pvt Ltd · High-Rise Building Construction (12 Floors) · ₹6,700 Cr · Sector 47, Gurugram</div>
+            
+            <div class="responsibilities-title">Key Responsibilities:</div>
+            <ul class="responsibility-list">
+              <li><strong>Project Planning & Scheduling:</strong> Developed comprehensive project schedules using Primavera P6 and MS Project for MEP installations across 12-storey high-rise building including HVAC, firefighting, plumbing, and electrical systems.</li>
+              <li><strong>Progress Monitoring & Reporting:</strong> Tracked daily/weekly progress against baseline schedules, identified critical path activities, and prepared detailed progress reports for management and client review.</li>
+              <li><strong>Resource Planning:</strong> Coordinated manpower allocation, equipment deployment, and material procurement schedules to ensure timely availability and optimize resource utilization across MEP trades.</li>
+              <li><strong>MEP Coordination:</strong> Led coordination meetings with architects, consultants, electrical/plumbing teams, and HVAC contractors to resolve technical issues and ensure seamless integration of MEP systems.</li>
+              <li><strong>Quality & Compliance:</strong> Ensured all MEP works comply with IKEA India standards, ASHRAE, SMACNA codes, and local building regulations; conducted regular site inspections and quality audits.</li>
+              <li><strong>Risk Management:</strong> Identified potential delays, resource constraints, and technical challenges; implemented mitigation strategies to keep the project on schedule and within budget.</li>
+              <li><strong>Stakeholder Management:</strong> Maintained regular communication with IKEA PMC, client representatives, contractors, and vendors; facilitated decision-making and issue resolution to prevent project delays.</li>
+            </ul>
+          </div>
+
+          <!-- Darwish Interserve -->
+          <div class="experience-item">
+            <div class="exp-header">
+              <div class="job-title">MEP Site Engineer</div>
+              <div class="date-badge">Nov 2023 – Oct 2024</div>
+            </div>
+            <div class="company-name">Darwish Interserve Facilities Management, Qatar</div>
+            <div class="project-details">MEP Supervisor · Facilities Management & Maintenance</div>
+            
+            <div class="responsibilities-title">Key Responsibilities:</div>
+            <ul class="responsibility-list">
+              <li><strong>Site Supervision:</strong> Supervised on-site technicians and subcontractors to ensure MEP works were executed according to project drawings, specifications, and timelines.</li>
+              <li><strong>Technical Review:</strong> Reviewed HVAC design drawings, shop drawings, and material submittals for accuracy and compliance with industry standards (ASHRAE, SMACNA).</li>
+              <li><strong>Quality Control:</strong> Prepared and submitted material inspection requests; conducted post-installation work inspections reviewed by consultants to ensure quality compliance.</li>
+              <li><strong>Coordination:</strong> Coordinated with architects, consultants, electrical/plumbing teams, and other stakeholders to resolve technical issues and ensure seamless integration of HVAC systems.</li>
+              <li><strong>Documentation:</strong> Prepared daily/weekly progress reports, site logs, and handover documentation; maintained accurate records of all site activities and inspections.</li>
+            </ul>
+          </div>
+
+          <!-- Elegancia -->
+          <div class="experience-item">
+            <div class="exp-header">
+              <div class="job-title">Facilities Management Supervisor</div>
+              <div class="date-badge">Jan 2019 – Oct 2023</div>
+            </div>
+            <div class="company-name">Elegancia Facilities Management, Qatar</div>
+            <div class="project-details">Site Engineer · Residential & Commercial Projects</div>
+            
+            <div class="responsibilities-title">Key Responsibilities:</div>
+            <ul class="responsibility-list">
+              <li><strong>Project Oversight:</strong> Monitored and oversaw the progress of MEP projects including HVAC, chilled water systems, pumps, and firefighting installations.</li>
+              <li><strong>Team Leadership:</strong> Directed and supervised daily activities of work crews; conducted training sessions to ensure successful job completion and adherence to safety protocols.</li>
+              <li><strong>Project Management:</strong> Kept projects on track in terms of time and budget; implemented corrective actions when deviations occurred.</li>
+              <li><strong>Systems Expertise:</strong> Managed chilled water systems, chillers, chilled water pumps, booster pumps, domestic pumps, and pump automation systems.</li>
+              <li><strong>HVAC Operations:</strong> Oversaw all aspects of HVAC systems including ductwork, chilled water systems, chiller plants, and cooling towers.</li>
+              <li><strong>Safety & Compliance:</strong> Ensured all work was carried out in compliance with relevant codes, standards, and safety regulations.</li>
+            </ul>
+          </div>
+
+          <!-- Melhor Group -->
+          <div class="experience-item">
+            <div class="exp-header">
+              <div class="job-title">MEP Site Engineer</div>
+              <div class="date-badge">2025 (6 Months)</div>
+            </div>
+            <div class="company-name">Melhor Group</div>
+            <div class="project-details">MEP Site Engineer · Construction Projects</div>
+            
+            <div class="responsibilities-title">Key Responsibilities:</div>
+            <ul class="responsibility-list">
+              <li>Supervised MEP installations and coordinated with multiple trade contractors on site.</li>
+              <li>Reviewed technical drawings and ensured compliance with project specifications and quality standards.</li>
+              <li>Conducted site inspections and prepared progress reports for management review.</li>
+            </ul>
+          </div>
+
+          <!-- Asahi India Glass -->
+          <div class="experience-item">
+            <div class="exp-header">
+              <div class="job-title">QA/QC Engineer</div>
+              <div class="date-badge">2018 (6 Months)</div>
+            </div>
+            <div class="company-name">Asahi India Glass Limited</div>
+            <div class="project-details">Quality Assurance & Quality Control · Manufacturing</div>
+            
+            <div class="responsibilities-title">Key Responsibilities:</div>
+            <ul class="responsibility-list">
+              <li>Conducted quality inspections of manufactured glass products to ensure compliance with specifications.</li>
+              <li>Identified defects and non-conformances; prepared quality reports and recommended corrective actions.</li>
+              <li>Maintained quality documentation and collaborated with production teams to improve manufacturing processes.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Strengths -->
+        <div class="section">
+          <div class="section-title">Core Strengths</div>
+          <ul class="strengths-list">
+            <li><strong>Hardworking</strong> – Committed to achieving goals</li>
+            <li><strong>Sincere</strong> – Genuine dedication to responsibilities</li>
+            <li><strong>Self-Confident</strong> – Tackles challenges effectively</li>
+            <li><strong>Team Management</strong> – Leading teams efficiently</li>
+            <li><strong>Time Management</strong> – Adheres to project deadlines</li>
+            <li><strong>Technical Expertise</strong> – Strong MEP knowledge</li>
+            <li><strong>Problem Solving</strong> – Quick resolution of issues</li>
+          </ul>
+        </div>
+
+        <!-- Hobbies -->
+        <div class="section">
+          <div class="section-title">Hobbies & Interests</div>
+          <ul class="hobbies-list">
+            <li>Listening to Music</li>
+            <li>Playing Cricket</li>
+            <li>Technology & Innovation</li>
+            <li>Reading Technical Journals</li>
+          </ul>
+        </div>
+
+      </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">© 2025 Salman Khan · skhan783691@gmail.com · +91-7836917199</div>
+      <div class="footer-right">MEP Professional</div>
+    </div>
+
+  </div><!-- /paper -->
+</div><!-- /screen-container -->
+
+</body>
+</html>
